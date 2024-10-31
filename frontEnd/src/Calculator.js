@@ -9,7 +9,7 @@ const Calculator = () => {
 
 
   const handleClick = (value) => {
-    setIsEvaluated(0) ;
+    setIsEvaluated(false) ;
     if (display === 'Error') {
       setDisplay(value);
       setExpression(value);
@@ -20,8 +20,8 @@ const Calculator = () => {
   };
 
   const removelast = () => {
-    setIsEvaluated(0) ;
-    if (expression.endsWith("sqrt(")) {
+    if (isEvaluated) handleClear();
+    else if (expression.endsWith("sqrt(")) {
       setDisplay(expression.slice(0, -5));
       setExpression(expression.slice(0, -5));
     }
@@ -67,7 +67,7 @@ const Calculator = () => {
       <div className="calculator-buttons">
         {/* Row 1 */}
         <button onClick={() => handleClick('%')} className="calculator-button">%</button>
-        <button onClick={handleClear} className="calculator-button">CE</button>
+        <button onClick={() => handleClick('^')} className="calculator-button">^</button>
         <button onClick={handleClear} className="calculator-button">C</button>
         <button onClick={removelast} className="calculator-button remove-button"></button>
 
